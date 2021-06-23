@@ -1,6 +1,6 @@
-var mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
-var commentSchema = new mongoose.Schema({
+const commentSchema = new mongoose.Schema({
     date: {type: Date, default: Date.now},
     text: String,
     author: {
@@ -8,8 +8,10 @@ var commentSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: "User"
         },
-        username: String
+        username: String,
     }
-});
+},{
+    usePushEach: true
+  });
 
 module.exports = mongoose.model("Comment", commentSchema);

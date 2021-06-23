@@ -1,7 +1,7 @@
-var Comment = require("../models/comment");
-var Blog    = require("../models/blog");
+const Comment = require("../models/comment");
+const Blog    = require("../models/blog");
 
-var middlewareObj = {};
+const middlewareObj = {};
 middlewareObj.isLoggedIn = function(req, res, next){
     if(req.isAuthenticated()){
         return next();

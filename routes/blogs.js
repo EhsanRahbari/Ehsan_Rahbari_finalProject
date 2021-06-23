@@ -1,7 +1,7 @@
-var express = require("express");
-var router = express.Router({mergeParams: true});
-var Blog = require("../models/blog");
-var middleware = require("../middleware");
+const express = require("express");
+const router = express.Router({mergeParams: true});
+const Blog = require("../models/blog");
+const middleware = require("../middleware");
 
 //INDEX ROUTE
 router.get("/", function(req, res){

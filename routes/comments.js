@@ -1,19 +1,21 @@
-var express = require("express");
-var router = express.Router({mergeParams: true});
-var Blog = require("../models/blog");
-var Comment = require("../models/comment");
-var middleware = require("../middleware");
+const express = require("express");
+const router = express.Router({mergeParams: true});
+const Blog = require("../models/blog");
+const Comment = require("../models/comment");
+const middleware = require("../middleware");
 
 //---------------COMMENT PART ---------------------------
 //CREATE ROUTE
 router.post("/", middleware.isLoggedIn, function(req, res){
     //find the post by ID
+    // console.log("this is here!");
     Blog.findById(req.params.id, function(err, foundBlog) {
+        console.log("comming to this route!");
         if(err){
             console.log(err);
             res.redirect("/blogs");
         } else{
-            var addedComment = {
+            const addedComment = {
                 text: req.body.text,
                 author: {
                     id: req.user._id,
@@ -24,7 +26,8 @@ router.post("/", middleware.isLoggedIn, function(req, res){
                 if(err){
                     console.log(err);
                 } else{
-                    foundBlog.comments.push(newComment);
+                    // console.log("this is else in comment!");
+                    foundBlog.comments = foundBlog.comments.concat(newComment);
                     foundBlog.save();
                     res.redirect("/blogs/" + req.params.id);
                 }
@@ -66,32 +69,5 @@ router.delete("/:comment_id", middleware.checkOwnershipComment, function(req, re
         }
     }) 
 });
-
-//add middleware isLoggedIn
-// function isLoggedIn(req, res, next){
-//     if(req.isAuthenticated()){
-//         return next();
-//     }
-//     res.redirect("/login");
-// }
-
-// //add middleware checkOwnership
-// function checkOwnershipComment(req, res, next){
-//     if(req.isAuthenticated()){
-//         Comment.findById(req.params.comment_id, function(err, foundComment) {
-//             if(err){
-//                 res.redirect("back");
-//             } else{
-//                 if(req.user._id.equals(foundComment.author.id)){
-//                     return next();
-//                 } else{
-//                     res.redirect("back");
-//                 }
-//             }
-//         })
-//     } else{
-//         res.redirect("back");
-//     }
-// }
 
 module.exports = router;

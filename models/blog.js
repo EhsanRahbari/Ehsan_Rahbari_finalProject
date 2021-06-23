@@ -1,7 +1,7 @@
-var mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
 //Mongoose/Model Config
-var blogSchema = new mongoose.Schema({
+const blogSchema = new mongoose.Schema({
     title: String,
     image: String,
     body: String,
@@ -18,6 +18,6 @@ var blogSchema = new mongoose.Schema({
         ref: "Comment"
     }]
 });
-var Blog = mongoose.model("Blog", blogSchema);
+const Blog = mongoose.model("Blog", blogSchema);
 
 module.exports = Blog;

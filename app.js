@@ -1,4 +1,4 @@
-var bodyParser          = require("body-parser"),
+const bodyParser          = require("body-parser"),
     mongoose            = require("mongoose"),
     express             = require("express"),
     app                 = express(),
@@ -12,9 +12,9 @@ var bodyParser          = require("body-parser"),
     User                = require("./models/user");
 
 //Require Route Root
-var authRoutes = require("./routes/auth");
-var blogRoutes = require("./routes/blogs");
-var commentRoutes = require("./routes/comments");
+const authRoutes = require("./routes/auth");
+const blogRoutes = require("./routes/blogs");
+const commentRoutes = require("./routes/comments");
     
 //App Config
 mongoose.connect("mongodb://localhost:27017/blog_site", {useMongoClient: true});
